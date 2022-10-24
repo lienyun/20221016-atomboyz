@@ -7,16 +7,13 @@
     <div class="cards-container">
       <div class="cards" v-for="atomboy in nameList" :key="atomboy.id">
         <router-link class="card-router" :to="`/${atomboy.id}`">
-
           <div class="card" :data-content="atomboy.name">
             <img :src="atomboy.pic" :alt="atomboy.name">
           </div>
         </router-link>
+        <h3 class="rwd-name">{{ atomboy.name }}</h3>
       </div>
-      
     </div>
-
-
   </div>
 
 </template>
@@ -30,7 +27,7 @@ export default {
     }
   },
   mounted() {
-    
+
     this.axios.get('../namelist.json')
       .then((res) => {
         this.nameList = res.data
@@ -51,6 +48,7 @@ $colorRed: #BC0300;
 h1,
 h3 {
   margin: 0;
+  text-align: center;
 }
 
 h1 {
@@ -75,14 +73,17 @@ img {
 
 .cards-container {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   margin-top: 40px;
 }
+
 .card-router {
   display: block;
 }
+
 .cards {
-  padding: 0 20px 20px 0;
+  padding: 10px;
 }
 
 .card {
@@ -130,8 +131,30 @@ img {
     z-index: 2;
     content: attr(data-content);
     text-align: center;
-
-
   }
+}
+
+.rwd-name {
+  display: none;
+}
+
+//螢幕縮小時的畫面：
+@media(max-width: 540px) {
+
+  .cards {
+    padding: 20px 0;
+  }
+
+  .rwd-name {
+    display: block;
+    margin-top: 10px;
+  }
+  .card::before {
+    background-color: rgba(white, 0.5);
+  }
+  .card::after {
+    display: none;
+  }
+
 }
 </style>

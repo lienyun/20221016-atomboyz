@@ -41,7 +41,7 @@
     "nickName": "",
     "birthday": "19991007",
     "planet": "地球",
-    "group": "Ozone",
+    "group": "",
     "pic": "https://atomboyz.beanfun.com/_admin/upload/66.jpg",
     "introText": "",
     "video": "",
@@ -146,7 +146,7 @@
   {
     "id": "13",
     "name": "李秉諭",
-    "nickName": "",
+    "nickName": "貢丸",
     "birthday": "20050227",
     "planet": "水星",
     "group": "AcQUA源少年",
@@ -170,7 +170,7 @@
   {
     "id": "15",
     "name": "須弘道",
-    "nickName": "",
+    "nickName": "須須",
     "birthday": "20060425",
     "planet": "水星",
     "group": "AcQUA源少年",
@@ -218,7 +218,7 @@
   {
     "id": "19",
     "name": "藍弟",
-    "nickName": "",
+    "nickName": "藍子桓",
     "birthday": "19980617",
     "planet": "金星",
     "group": "",
@@ -260,7 +260,8 @@
     "group": "",
     "pic": "https://atomboyz.beanfun.com/_admin/upload/20.jpg",
     "introText": "",
-    "video": "",
+    "videoTitle": "金星COVER學姊片段",
+    "video": "https://youtu.be/nUBCR1yA33w",
     "instagram": "https://www.instagram.com/mike___1030/"
   },
   {
@@ -343,7 +344,7 @@
     "planet": "土星",
     "group": "",
     "pic": "https://atomboyz.beanfun.com/_admin/upload/33.jpg",
-    "introText": "",
+    "introText": "羅志祥狂粉?_?",
     "video": "",
     "instagram": "https://www.instagram.com/elvis_0818/"
   },
@@ -403,7 +404,7 @@
     "planet": "土星",
     "group": "",
     "pic": "https://atomboyz.beanfun.com/_admin/upload/35.jpg",
-    "introText": "",
+    "introText": "舞蹈天花版",
     "video": "",
     "instagram": "https://www.instagram.com/marvinofl/"
   },
@@ -458,7 +459,7 @@
   {
     "id": "39",
     "name": "小孩",
-    "nickName": "",
+    "nickName": "何世華",
     "birthday": "20010410",
     "planet": "天王星",
     "group": "",
@@ -482,12 +483,12 @@
   {
     "id": "41",
     "name": "周子翔",
-    "nickName": "",
+    "nickName": "原子發電機",
     "birthday": "19991122",
     "planet": "海王星",
     "group": "Ozone",
     "pic": "https://atomboyz.beanfun.com/_admin/upload/44.jpg",
-    "introText": "",
+    "introText": "超可愛...",
     "video": "",
     "instagram": "https://www.instagram.com/zx81122/"
   },

@@ -2,15 +2,19 @@
   <!-- <h3>ID: {{$route.params.atomId}}</h3> -->
   <div class="container">
     <h1>ATOMBOYZ</h1>
+    <div class="rwd-name">
+      <h3>{{ name }}</h3>
+      <h5>{{ nickName }}</h5>
+    </div>
     <div class="info">
       <div class="img-matte">
         <img :src=pic alt="">
-
       </div>
       <div class="right-info">
         <div class="right-up">
           <h3>{{ name }}</h3>
-          <h5>{{ introText }}</h5>
+          <h5>{{ nickName }}</h5>
+          <p>{{ introText }}</p>
           <table>
             <tbody>
               <tr>
@@ -29,15 +33,29 @@
           </table>
           <a :href=instagram target="_blank">Instagram</a>
         </div>
-        <div class="right-bottom">
-          <button>連結</button>
-          <button>連結</button>
-          <button>連結</button>
-          <button>連結</button>
-
+        <div class="right-bottom" v-if="videoTitle">
+          <button><a :href="video">{{ videoTitle }}</a></button>
         </div>
       </div>
-
+      <div class="rwd-info">
+        <table>
+          <tbody>
+            <tr>
+              <td>生日</td>
+              <td>{{ birthday }}</td>
+            </tr>
+            <tr>
+              <td>星球</td>
+              <td>{{ planet }}</td>
+            </tr>
+            <tr v-if="group">
+              <td>所屬團體</td>
+              <td>{{ group }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a :href=instagram target="_blank">Instagram</a>
+      </div>
     </div>
   </div>
 
@@ -48,12 +66,15 @@ export default {
   data() {
     return {
       name: '',
+      nickName: '',
       pic: '',
       introText: '',
       instagram: '',
       birthday: '',
       planet: '',
-      group: ''
+      group: '',
+      videoTitle: '',
+      video: ''
     }
   },
   mounted() {
@@ -71,6 +92,9 @@ export default {
         this.birthday = atomboyInfo.birthday
         this.planet = atomboyInfo.planet
         this.group = atomboyInfo.group
+        this.video = atomboyInfo.video
+        this.videoTitle = atomboyInfo.videoTitle
+        this.nickName = atomboyInfo.nickName
       })
   }
 }
@@ -84,7 +108,8 @@ $colorRed: #BC0300;
 }
 
 h1,
-h3 {
+h3,
+h5 {
   margin: 0;
 }
 
@@ -98,14 +123,19 @@ h3 {
   color: black;
   font-size: 36px;
 }
+h5 {
+  color: rgba(black,0.7);
+  font-size: 20px;
+}
 
 img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transform: scale(1.05);
 }
 
-a {
+.right-up>a {
   text-decoration: none;
   color: $colorRed;
 }
@@ -128,6 +158,11 @@ td {
   &:first-of-type {
     width: 30%;
   }
+}
+
+.rwd-name,
+.rwd-info {
+  display: none;
 }
 
 .container {
@@ -169,10 +204,58 @@ td {
   color: black;
   font-size: 16px;
   border-radius: 10px;
+
   &:hover {
     cursor: pointer;
     background-color: $colorRed;
-    color: white
+
+  }
+
+  &>a {
+    text-decoration: none;
+    color: black;
+  }
+}
+
+//螢幕縮小時的畫面：
+@media(max-width: 540px) {
+  h1 {
+    display: none;
+  }
+
+  .rwd-name {
+    display: block;
+    text-align: center;
+    margin-bottom: 20px;
+    opacity: 0.7;
+
+    &>h5 {
+      font-size: 20px;
+      margin: 0;
+    }
+  }
+
+  .rwd-info {
+    display: block;
+
+    &>a {
+      text-decoration: none;
+      color: $colorRed;
+      
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .img-matte {
+    width: 100%;
+  }
+
+  .right-info {
+    display: none;
   }
 }
 </style>
