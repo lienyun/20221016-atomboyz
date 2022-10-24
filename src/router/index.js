@@ -1,12 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import AtomboyzView from '../views/AtomboyzView.vue'
 import AtomboyView from '../views/AtomboyView.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: AtomboyzView
   },
   {
     path: '/:atomId',

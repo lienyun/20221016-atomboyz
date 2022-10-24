@@ -2,7 +2,7 @@
   <div class="container">
     <div class="title">
       <h1>ATOMBOYZ</h1>
-      <h3>原子少年</h3>
+      <h3>大部分的原子少年</h3>
     </div>
     <div class="cards-container">
       <div class="cards" v-for="atomboy in nameList" :key="atomboy.id">
