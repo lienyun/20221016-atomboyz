@@ -1,4 +1,4 @@
-# atomboyz
+# 原子少年資料網站
 
 ## Project setup
 ```
