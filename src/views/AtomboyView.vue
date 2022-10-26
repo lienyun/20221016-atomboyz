@@ -1,5 +1,5 @@
 <template>
-  <!-- <h3>ID: {{$route.params.atomId}}</h3> -->
+  
   <div class="container">
     <h1>ATOMBOYZ</h1>
     <div class="rwd-name">
@@ -62,6 +62,7 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
@@ -101,7 +102,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$colorRed: #BC0300;
+$colorRed: #F06060;
 
 * {
   font-family: 'Contrail One', 'Noto Sans TC';

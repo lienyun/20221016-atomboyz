@@ -1,9 +1,15 @@
 <template>
   <div class="container">
     <div class="title">
-      <h1>ATOMBOYZ</h1>
       <h3>大部分的原子少年</h3>
+      <p>並不是全體少年，依照個人喜好還有淘汰先後順序、網路聲浪等選出42位！</p>
     </div>
+    <PlanetNav @changePlanet="getPlanet"></PlanetNav>
+    <!-- <div>
+      <button @click="selectPlanet()">水星</button>
+
+    </div> -->
+
     <div class="cards-container">
       <div class="cards" v-for="atomboy in nameList" :key="atomboy.id">
         <router-link class="card-router" :to="`/${atomboy.id}`">
@@ -18,6 +24,7 @@
 
 </template>
 <script>
+import PlanetNav from '../components/PlanetNav.vue'
 
 export default {
   name: 'Artist',
@@ -27,26 +34,37 @@ export default {
     }
   },
   mounted() {
-
     this.axios.get('../namelist.json')
       .then((res) => {
         this.nameList = res.data
       })
   },
   methods: {
+    getPlanet(planet){
+      console.log('AtomBoyzView',planet)
+      var planetList = this.nameList.filter((e)=>{
+        return e.planet === planet
+      })
+      // console.log('planetList',planetList)
+      this.nameList = planetList
+      //TODO: 如何重製陣列
+    }
+  },
+  components: {
+    PlanetNav
   }
 }
 
 </script>
 <style lang="scss" scoped>
-$colorRed: #BC0300;
+$colorRed: #5C4B51;
 
 * {
   font-family: 'Contrail One', 'Noto Sans TC';
 }
 
 h1,
-h3 {
+h3,p {
   margin: 0;
   text-align: center;
 }
@@ -60,11 +78,16 @@ h1 {
 h3 {
   color: rgba(black, 0.6)
 }
+p {
+  color: rgba(black, 0.6);
+  padding: 10px 0;
+}
 
 img {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  transform: scale(1.05);
 }
 
 .container {
@@ -95,6 +118,7 @@ img {
   cursor: pointer;
   transition: 0.5s;
   position: relative;
+  box-shadow: 0px 0px 5px rgba(black,0.5);
 
   &::before,
   &::after {

@@ -16,7 +16,7 @@
 </template>
 
 <style lang="scss" scoped>
-$colorRed: #BC0300;
+$colorRed: #F06060;
 
 * {
   // border: 1px solid #000;
@@ -24,32 +24,39 @@ $colorRed: #BC0300;
 }
 
 nav {
-    background-color: $colorRed;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-content: center;
-    padding: 20px 80px;
-  }
+  background: $colorRed;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  padding: 20px 80px;
+}
 
-  .nav-left,
-  .author {
-    display: flex;
-    align-items: center;
-  }
+.nav-left,
+.author,
+.nav-center {
+  display: flex;
+  width: 150px;
+}
+.nav-center {
+  justify-content: center;
+}
+.author {
+  justify-content: end;
+}
+h3 {
+  font-size: 24px;
+}
 
-  h3 {
-    font-size: 24px;
-  }
+h5 {
+  font-size: 18px;
+}
 
-  h5 {
-    font-size: 18px;
-  }
+a {
+  text-decoration: none;
+  color: white
+}
 
-  a {
-    text-decoration: none;
-    color: white
-  }
 //螢幕縮小時的畫面：
 @media(max-width: 540px) {
   nav {
@@ -61,7 +68,8 @@ nav {
     padding: 20px 80px;
   }
 
-  .nav-left,.author{
+  .nav-left,
+  .author {
     display: none;
     // align-items: center;
   }
@@ -80,6 +88,4 @@ nav {
     color: white
   }
 }
-
-
 </style>
