@@ -1,9 +1,8 @@
 <template>
   <div class="buttons">
-    <div class="button" v-for="(planet,i) in planetList" :key="i">
-      <button @click="changePlanet(planet)">{{ planet }}</button>
+    <div class="button" v-for="(planet, i) in planetList" :key="i">
+      <button :class="{isSelected: currentPlanet === planet} " @click="changePlanet(planet)">{{ planet }}</button>
     </div>
-
   </div>
 
 
@@ -14,29 +13,33 @@ export default {
   name: 'planetVue',
   data() {
     return {
-      planetList: ['太陽系','水星', '金星', '木星', '土星', '火星', '地球', '天王星', '海王星']
+      planetList: ['太陽系', '水星', '金星', '木星', '土星', '火星', '地球', '天王星', '海王星']
     }
   },
   mounted() {
 
   },
   methods: {
-    changePlanet(planet){
-      this.$emit('changePlanet',planet)
+    changePlanet(planet) {
+      this.$emit('changePlanet', planet)
+      
     }
-  }
+  },
+  props: ['currentPlanet']
 }
 </script>
 
 <style lang="scss" scoped>
-
 $colorOrange: #F3B562;
+$colorGreen: #8CBEB2;
+
 .buttons {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  & button{
+
+  & button {
     background-color: $colorOrange;
     border: 0px;
     margin: 10px;
@@ -45,15 +48,20 @@ $colorOrange: #F3B562;
     font-weight: 600;
     font-size: 16px;
     border-radius: 10px;
-    transition: .5s;
+    // transition: .5s;
+
     &:hover {
-      box-shadow: 0px 0px 10px rgba($colorOrange,0.8);
+      box-shadow: 0px 0px 10px rgba($colorOrange, 0.8);
       transition: .5s;
       cursor: pointer;
     }
+
+    &.isSelected {
+      background-color: $colorGreen;
+      &:hover {
+        box-shadow: 0px 0px 10px rgba($colorGreen, 0.8);
+      }
+    }
   }
 }
-
-
-
 </style>
