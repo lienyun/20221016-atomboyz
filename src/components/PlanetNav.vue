@@ -14,7 +14,7 @@ export default {
   name: 'planetVue',
   data() {
     return {
-      planetList: ['水星', '金星', '木星', '土星', '火星', '地球', '天王星', '海王星']
+      planetList: ['太陽系','水星', '金星', '木星', '土星', '火星', '地球', '天王星', '海王星']
     }
   },
   mounted() {

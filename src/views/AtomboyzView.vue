@@ -11,7 +11,7 @@
     </div> -->
 
     <div class="cards-container">
-      <div class="cards" v-for="atomboy in nameList" :key="atomboy.id">
+      <div class="cards" v-for="atomboy in selectedPlanetList" :key="atomboy.id">
         <router-link class="card-router" :to="`/${atomboy.id}`">
           <div class="card" :data-content="atomboy.name">
             <img :src="atomboy.pic" :alt="atomboy.name">
@@ -30,24 +30,29 @@ export default {
   name: 'Artist',
   data() {
     return {
-      nameList: [],
+      allBoyz: [],
+      selectedPlanetList:[]
     }
   },
   mounted() {
     this.axios.get('../namelist.json')
       .then((res) => {
-        this.nameList = res.data
+        this.allBoyz = res.data
+        this.selectedPlanetList = this.allBoyz
       })
   },
   methods: {
     getPlanet(planet){
-      console.log('AtomBoyzView',planet)
-      var planetList = this.nameList.filter((e)=>{
-        return e.planet === planet
-      })
-      // console.log('planetList',planetList)
-      this.nameList = planetList
-      //TODO: 如何重製陣列
+      //this.selectedPlanet = planet
+
+      if(planet === '太陽系'){
+        return this.selectedPlanetList = this.allBoyz
+      }else{
+        var selectedBoyz = this.allBoyz.filter((e)=>{
+          return e.planet === planet
+        })
+        this.selectedPlanetList = selectedBoyz
+      }
     }
   },
   components: {
