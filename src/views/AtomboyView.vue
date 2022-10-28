@@ -1,5 +1,5 @@
 <template>
-  
+
   <div class="container">
     <h1>ATOMBOYZ</h1>
     <div class="rwd-name">
@@ -7,9 +7,17 @@
       <h5>{{ nickName }}</h5>
     </div>
     <div class="info">
-      <div class="img-matte">
-        <img :src=pic alt="">
+      <div class="img-group">
+        <div class="img-matte">
+          <img :src=pic alt="">
+        </div>
+        <div class="img-s-matte" v-if="pic2" @click="changePic()">
+          <img :src="pic2" alt="">
+        </div>
+
       </div>
+
+
       <div class="right-info">
         <div class="right-up">
           <h3>{{ name }}</h3>
@@ -69,6 +77,7 @@ export default {
       name: '',
       nickName: '',
       pic: '',
+      pic2: '',
       introText: '',
       instagram: '',
       birthday: '',
@@ -85,9 +94,9 @@ export default {
         // console.log(res.data)
         var allBoyz = res.data
         const atomboyInfo = allBoyz.find((e) => e.id === this.$route.params.atomId)
-        console.log('atomboyInfo', atomboyInfo)
         this.name = atomboyInfo.name
         this.pic = atomboyInfo.pic
+        this.pic2 = atomboyInfo.pic2
         this.introText = atomboyInfo.introText
         this.instagram = atomboyInfo.instagram
         this.birthday = atomboyInfo.birthday
@@ -97,6 +106,11 @@ export default {
         this.videoTitle = atomboyInfo.videoTitle
         this.nickName = atomboyInfo.nickName
       })
+  },
+  methods: {
+    changePic(){
+      console.log('changePic')
+    }
   }
 }
 </script>
@@ -124,17 +138,13 @@ h3 {
   color: black;
   font-size: 36px;
 }
+
 h5 {
-  color: rgba(black,0.7);
+  color: rgba(black, 0.7);
   font-size: 20px;
 }
 
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform: scale(1.05);
-}
+
 
 .right-up>a {
   text-decoration: none;
@@ -176,11 +186,39 @@ td {
   width: 100%;
 }
 
-.img-matte {
+.img-group {
   width: 50%;
   height: 50%;
+}
+
+.img-matte {
   border-radius: 10px;
   overflow: hidden;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transform: scale(1.05);
+  }
+}
+
+.img-s-matte {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 
 .right-info {
@@ -242,7 +280,7 @@ td {
     &>a {
       text-decoration: none;
       color: $colorRed;
-      
+
     }
   }
 
