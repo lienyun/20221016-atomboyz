@@ -4,11 +4,7 @@
       <h3>大部分的原子少年</h3>
       <p>並不是全體少年，依照個人喜好還有淘汰先後順序、網路聲浪等選出42位！</p>
     </div>
-    <PlanetNav @changePlanet="getPlanet"></PlanetNav>
-    <!-- <div>
-      <button @click="selectPlanet()">水星</button>
-
-    </div> -->
+    <PlanetNav @changePlanet="getPlanet" :currentPlanet="selectedPlanet"></PlanetNav>
 
     <div class="cards-container">
       <div class="cards" v-for="atomboy in selectedPlanetList" :key="atomboy.id">
@@ -31,7 +27,8 @@ export default {
   data() {
     return {
       allBoyz: [],
-      selectedPlanetList:[]
+      selectedPlanetList:[],
+      selectedPlanet: '太陽系'
     }
   },
   mounted() {
@@ -43,15 +40,15 @@ export default {
   },
   methods: {
     getPlanet(planet){
-      //this.selectedPlanet = planet
 
       if(planet === '太陽系'){
-        return this.selectedPlanetList = this.allBoyz
+        this.selectedPlanetList = this.allBoyz
       }else{
         var selectedBoyz = this.allBoyz.filter((e)=>{
           return e.planet === planet
         })
         this.selectedPlanetList = selectedBoyz
+        this.selectedPlanet = planet
       }
     }
   },
