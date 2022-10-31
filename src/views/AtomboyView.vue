@@ -11,11 +11,11 @@
       <div class="img-group">
 
         <div class="img-matte">
-          <img :src="pics[0]" alt="">
+          <img :src="mainPic" alt="">
         </div>
 
         <div class="small-pics">
-          <div class="img-s-matte" @click="changePic(i)" v-for="(pic, i) in pics.slice(1)" :key="i">
+          <div class="img-s-matte" @click="changePic(i)" v-for="(pic, i) in pics" :key="i">
             <img :src="pic" alt="">
           </div>
         </div>
@@ -83,6 +83,7 @@ export default {
       name: '',
       nickName: '',
       pics: [],
+      mainPic: '',
       introText: '',
       instagram: '',
       birthday: '',
@@ -101,6 +102,7 @@ export default {
         const atomboyInfo = allBoyz.find((e) => e.id === this.$route.params.atomId)
         this.name = atomboyInfo.name
         this.pics = atomboyInfo.pics
+        this.mainPic = atomboyInfo.pics[0]
         this.introText = atomboyInfo.introText
         this.instagram = atomboyInfo.instagram
         this.birthday = atomboyInfo.birthday
@@ -115,15 +117,7 @@ export default {
     changePic(i) {
       console.log('changePic', i)
       console.log(this.pics)
-      var deletedArr = this.pics.filter((e,index)=>{
-        return i+1 !== index
-      })
-      console.log('deletedArr',deletedArr)
-      // //從頭新增item=>unshift
-      deletedArr.unshift(this.pics[i+1])
-      console.log('deletedArr',deletedArr)
-      this.pics = deletedArr
-      
+      this.mainPic = this.pics[i]
     }
   }
 }
