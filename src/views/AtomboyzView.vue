@@ -10,7 +10,7 @@
       <div class="cards" v-for="atomboy in selectedPlanetList" :key="atomboy.id">
         <router-link class="card-router" :to="`/${atomboy.id}`">
           <div class="card" :data-content="atomboy.name">
-            <img :src="atomboy.pic" :alt="atomboy.name">
+            <img :src="atomboy.pics[0]" :alt="atomboy.name">
           </div>
         </router-link>
         <h3 class="rwd-name">{{ atomboy.name }}</h3>
@@ -27,7 +27,7 @@ export default {
   data() {
     return {
       allBoyz: [],
-      selectedPlanetList:[],
+      selectedPlanetList: [],
       selectedPlanet: '太陽系'
     }
   },
@@ -39,12 +39,12 @@ export default {
       })
   },
   methods: {
-    getPlanet(planet){
+    getPlanet(planet) {
 
-      if(planet === '太陽系'){
+      if (planet === '太陽系') {
         this.selectedPlanetList = this.allBoyz
-      }else{
-        var selectedBoyz = this.allBoyz.filter((e)=>{
+      } else {
+        var selectedBoyz = this.allBoyz.filter((e) => {
           return e.planet === planet
         })
         this.selectedPlanetList = selectedBoyz
@@ -66,7 +66,8 @@ $colorRed: #5C4B51;
 }
 
 h1,
-h3,p {
+h3,
+p {
   margin: 0;
   text-align: center;
 }
@@ -80,16 +81,10 @@ h1 {
 h3 {
   color: rgba(black, 0.6)
 }
+
 p {
   color: rgba(black, 0.6);
   padding: 10px 0;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  transform: scale(1.05);
 }
 
 .container {
@@ -116,11 +111,17 @@ img {
   height: 250px;
   border-radius: 10px;
   overflow: hidden;
-  background-size: cover;
   cursor: pointer;
   transition: 0.5s;
   position: relative;
-  box-shadow: 0px 0px 5px rgba(black,0.5);
+  box-shadow: 0px 0px 5px rgba(black, 0.5);
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+  }
 
   &::before,
   &::after {
@@ -175,9 +176,11 @@ img {
     display: block;
     margin-top: 10px;
   }
+
   .card::before {
     background-color: rgba(white, 0.5);
   }
+
   .card::after {
     display: none;
   }

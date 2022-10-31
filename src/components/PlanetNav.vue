@@ -48,19 +48,14 @@ $colorGreen: #8CBEB2;
     font-weight: 600;
     font-size: 16px;
     border-radius: 10px;
-    // transition: .5s;
 
     &:hover {
-      box-shadow: 0px 0px 10px rgba($colorOrange, 0.8);
-      transition: .5s;
+      transform: translate(-5px, -5px);
       cursor: pointer;
     }
 
     &.isSelected {
       background-color: $colorGreen;
-      &:hover {
-        box-shadow: 0px 0px 10px rgba($colorGreen, 0.8);
-      }
     }
   }
 }

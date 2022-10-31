@@ -5,15 +5,21 @@
     <div class="rwd-name">
       <h3>{{ name }}</h3>
       <h5>{{ nickName }}</h5>
+
     </div>
     <div class="info">
       <div class="img-group">
+
         <div class="img-matte">
-          <img :src=pic alt="">
+          <img :src="pics[0]" alt="">
         </div>
-        <div class="img-s-matte" v-if="pic2" @click="changePic()">
-          <img :src="pic2" alt="">
+
+        <div class="small-pics">
+          <div class="img-s-matte" @click="changePic(i)" v-for="(pic, i) in pics.slice(1)" :key="i">
+            <img :src="pic" alt="">
+          </div>
         </div>
+
 
       </div>
 
@@ -76,8 +82,7 @@ export default {
     return {
       name: '',
       nickName: '',
-      pic: '',
-      pic2: '',
+      pics: [],
       introText: '',
       instagram: '',
       birthday: '',
@@ -95,8 +100,7 @@ export default {
         var allBoyz = res.data
         const atomboyInfo = allBoyz.find((e) => e.id === this.$route.params.atomId)
         this.name = atomboyInfo.name
-        this.pic = atomboyInfo.pic
-        this.pic2 = atomboyInfo.pic2
+        this.pics = atomboyInfo.pics
         this.introText = atomboyInfo.introText
         this.instagram = atomboyInfo.instagram
         this.birthday = atomboyInfo.birthday
@@ -108,8 +112,18 @@ export default {
       })
   },
   methods: {
-    changePic(){
-      console.log('changePic')
+    changePic(i) {
+      console.log('changePic', i)
+      console.log(this.pics)
+      var deletedArr = this.pics.filter((e,index)=>{
+        return i+1 !== index
+      })
+      console.log('deletedArr',deletedArr)
+      // //從頭新增item=>unshift
+      deletedArr.unshift(this.pics[i+1])
+      console.log('deletedArr',deletedArr)
+      this.pics = deletedArr
+      
     }
   }
 }
@@ -194,27 +208,33 @@ td {
 .img-matte {
   border-radius: 10px;
   overflow: hidden;
-
-  & img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    transform: scale(1.05);
-  }
-}
-
-.img-s-matte {
-  width: 100px;
-  height: 100px;
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 10px;
+  position: relative;
+  aspect-ratio: 1/1;
 
   & img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transform: scale(1.05);
+  }
+}
+.small-pics {
+  display: flex;
+}
+.img-s-matte {
+  width: 100px;
+  height: 100px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 10px;
+  margin-right: 10px;
+
+  & img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05);
+
     &:hover {
       cursor: pointer;
     }
@@ -287,9 +307,22 @@ td {
   .info {
     display: flex;
     flex-direction: column;
+    // justify-content: center;
+    align-items: center;
+  }
+
+  .img-group {
+    width: auto;
+
   }
 
   .img-matte {
+    width: 100%;
+    min-width: 250px;
+
+  }
+
+  .rwd-info {
     width: 100%;
   }
 
