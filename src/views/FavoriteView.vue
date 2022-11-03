@@ -2,11 +2,10 @@
   <div class="container">
     <div class="title">
       <h3>你的pick！</h3>
-      <p>把你的pick收藏起來！</p>
     </div>
 
     <div class="cards-container">
-      <div class="cards" v-for="atomboy in allBoyz" :key="atomboy.id">
+      <div class="cards" v-for="atomboy in pickedBoyz" :key="atomboy.id">
         <router-link class="card-router" :to="`/${atomboy.id}`">
           <div class="card" :data-content="atomboy.name">
             <img :src="atomboy.pics[0]" :alt="atomboy.name">
@@ -31,14 +30,16 @@ export default {
       pickedBoyz:[]
     }
   },
-  mounted() {
-    this.axios.get('../namelist.json')
+  async mounted() {
+    await this.axios.get('../namelist.json')
       .then((res) => {
         this.allBoyz = res.data
-        console.log('this.allBoyz',...this.allBoyz)
+        console.log('this.allBoyz',this.allBoyz)
       })
-      
-
+      console.log('this.pickedId',this.pickedId)
+    this.pickedBoyz = this.allBoyz.filter((el)=>{
+      return this.pickedId.includes(el.id)
+    })
   },
 
 }
