@@ -214,6 +214,7 @@ td {
 }
 .small-pics {
   display: flex;
+  overflow-x: scroll;
 }
 .img-s-matte {
   width: 100px;
@@ -222,10 +223,12 @@ td {
   overflow: hidden;
   margin-top: 10px;
   margin-right: 10px;
+  flex-shrink: 0;
 
   & img {
     width: 100%;
     height: 100%;
+    // aspect-ratio: 1/1;
     object-fit: cover;
     transform: scale(1.05);
 

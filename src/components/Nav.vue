@@ -6,8 +6,12 @@
     <router-link to="/" class="nav-center">
       <h3>ATOM BOYZ</h3>
     </router-link>
-    <div class="author">
-      <h5>Wendy Chang</h5>
+    <div class="favorite">
+
+      <router-link to="/favorite">
+        <h5><font-awesome-icon icon="fa-solid fa-heart" /> My pick <font-awesome-icon icon="fa-solid fa-heart" /></h5>
+      </router-link>
+      
     </div>
 
   </nav>
@@ -33,7 +37,7 @@ nav {
 }
 
 .nav-left,
-.author,
+.favorite,
 .nav-center {
   display: flex;
   width: 150px;
@@ -41,7 +45,7 @@ nav {
 .nav-center {
   justify-content: center;
 }
-.author {
+.favorite {
   justify-content: end;
 }
 h3 {
@@ -69,7 +73,7 @@ a {
   }
 
   .nav-left,
-  .author {
+  .favorite {
     display: none;
     // align-items: center;
   }

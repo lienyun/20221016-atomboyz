@@ -1,89 +1,46 @@
 <template>
   <div class="container">
     <div class="title">
-      <h3>大部分的原子少年</h3>
-      <p>並不是全體少年，依照個人喜好還有淘汰先後順序、網路聲浪等選出42位！</p>
+      <h3>你的pick！</h3>
+      <p>把你的pick收藏起來！</p>
     </div>
-    <PlanetNav @changePlanet="getPlanet" :currentPlanet="selectedPlanet"></PlanetNav>
 
     <div class="cards-container">
-      <div class="cards" v-for="atomboy in selectedPlanetList" :key="atomboy.id">
+      <div class="cards" v-for="atomboy in allBoyz" :key="atomboy.id">
         <router-link class="card-router" :to="`/${atomboy.id}`">
           <div class="card" :data-content="atomboy.name">
             <img :src="atomboy.pics[0]" :alt="atomboy.name">
           </div>
         </router-link>
         <h3 class="rwd-name">{{ atomboy.name }}</h3>
-
-        <div class="pick" :class="{picked: this.pickedBoyz.indexOf(atomboy.id) !== -1}" @click="addFavorite(atomboy.id)">
-          <font-awesome-icon icon="fa-solid fa-heart" />
-        </div>
       </div>
     </div>
   </div>
 
 </template>
+
+
 <script>
-import PlanetNav from '../components/PlanetNav.vue'
 
 export default {
-  name: 'Artist',
+  name: 'Favorite',
   data() {
     return {
       allBoyz: [],
-      selectedPlanetList: [],
-      selectedPlanet: '太陽系',
-      pickedBoyz: []
+      pickedId: JSON.parse(localStorage.getItem('pickedId'))||[],
+      pickedBoyz:[]
     }
   },
   mounted() {
     this.axios.get('../namelist.json')
       .then((res) => {
         this.allBoyz = res.data
-        this.selectedPlanetList = this.allBoyz
+        console.log('this.allBoyz',...this.allBoyz)
       })
-
-      if(localStorage.getItem('pickedId') === null){
-        this.pickedBoyz = []
-      }else{
-        this.pickedBoyz = [...JSON.parse(localStorage.getItem('pickedId'))]
-      }
-      console.log('mounted local',this.pickedBoyz)
-  },
-  methods: {
-    getPlanet(planet) {
-
-      if (planet === '太陽系') {
-        this.selectedPlanetList = this.allBoyz
-      } else {
-        var selectedBoyz = this.allBoyz.filter((e) => {
-          return e.planet === planet
-        })
-        this.selectedPlanetList = selectedBoyz
-        this.selectedPlanet = planet
-      }
-    },
-    addFavorite(pickedId){
-      console.log(pickedId)
       
-      if(this.pickedBoyz.indexOf(pickedId) === -1){
-        this.pickedBoyz.push(pickedId)
-        alert('成功加入你的pick')
-        
-      }else{
-        var deleteArr = this.pickedBoyz.filter((e)=>{
-          return e !== pickedId
-        })
-        this.pickedBoyz = deleteArr
-        console.log('this.pickedBoyz',this.pickedBoyz)
-        alert('他不是你的pickㄌ')
-      }
-      localStorage.setItem('pickedId',JSON.stringify(this.pickedBoyz))
-    },
+
   },
-  components: {
-    PlanetNav
-  }
+
 }
 
 </script>
@@ -133,7 +90,6 @@ p {
 
 .cards {
   padding: 10px;
-  position: relative;
 }
 
 .card {
@@ -195,25 +151,6 @@ p {
   display: none;
 }
 
-.pick{
-  position: absolute;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-  color: white;
-
-  & svg{
-    width: 25px;
-    height: 25px;
-  }
-  &.picked{
-    color: #F06060;
-  }
-  &:hover{
-    cursor: pointer;
-  }
-}
-
 //螢幕縮小時的畫面：
 @media(max-width: 540px) {
 
@@ -233,7 +170,6 @@ p {
   .card::after {
     display: none;
   }
-
 
 }
 </style>
