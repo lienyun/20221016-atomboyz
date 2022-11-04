@@ -1,7 +1,12 @@
 <template>
   <div class="container">
     <div class="title">
-      <h3>你的pick！</h3>
+      <h3 v-if="pickedBoyz.length !== 0">你的pick！</h3>
+      <div v-else class="noPicked">
+        <h3>快去選擇你的pick吧</h3>
+        <router-link class="btn" to="/">回到首頁</router-link>
+      </div>
+
     </div>
 
     <div class="cards-container">
@@ -12,6 +17,11 @@
           </div>
         </router-link>
         <h3 class="rwd-name">{{ atomboy.name }}</h3>
+
+        <div class="pick" :class="{ picked: this.pickedBoyz.indexOf(atomboy.id) === -1 }"
+          @click="deleteFavorite(atomboy.id)">
+          <font-awesome-icon icon="fa-solid fa-heart" />
+        </div>
       </div>
     </div>
   </div>
@@ -26,21 +36,37 @@ export default {
   data() {
     return {
       allBoyz: [],
-      pickedId: JSON.parse(localStorage.getItem('pickedId'))||[],
-      pickedBoyz:[]
+      pickedId: JSON.parse(localStorage.getItem('pickedId')) || [],
+      pickedBoyz: []
     }
   },
   async mounted() {
     await this.axios.get('../namelist.json')
       .then((res) => {
         this.allBoyz = res.data
-        console.log('this.allBoyz',this.allBoyz)
+        console.log('this.allBoyz', this.allBoyz)
       })
-      console.log('this.pickedId',this.pickedId)
-    this.pickedBoyz = this.allBoyz.filter((el)=>{
+    console.log('this.pickedId', this.pickedId)
+    this.pickedBoyz = this.allBoyz.filter((el) => {
       return this.pickedId.includes(el.id)
     })
   },
+  methods: {
+    deleteFavorite(pickedId) {
+      // console.log(pickedId)
+      var result = this.pickedBoyz.filter((e) => {
+        return e.id !== pickedId
+      })
+      this.pickedBoyz = result
+      alert('他不是你的pickㄌ')
+      var idResult = this.pickedId.filter((e) => {
+        return e !== pickedId
+      })
+      this.pickedId = idResult
+      console.log('this.pickedId', this.pickedId)
+      localStorage.setItem('pickedId', JSON.stringify(this.pickedId))
+    }
+  }
 
 }
 
@@ -91,6 +117,8 @@ p {
 
 .cards {
   padding: 10px;
+  position: relative;
+
 }
 
 .card {
@@ -151,6 +179,60 @@ p {
 .rwd-name {
   display: none;
 }
+
+.pick {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+  color: white;
+
+  & svg {
+    width: 25px;
+    height: 25px;
+  }
+
+  &.picked {
+    color: #F06060;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+}
+
+.title,
+.noPicked {
+  display: flex;
+  justify-content: center;
+}
+
+.noPicked {
+  flex-direction: column;
+
+  & a {
+    text-decoration: none;
+    color: white;
+    text-align: center;
+  }
+
+  & .btn {
+    background-color: #F06060;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 0px;
+    margin-top: 20px;
+
+    &:hover {
+      transform: translate(-5px, -5px);
+      cursor: pointer;
+    }
+  }
+}
+
+
+
 
 //螢幕縮小時的畫面：
 @media(max-width: 540px) {

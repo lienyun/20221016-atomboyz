@@ -9,9 +9,12 @@
     <div class="favorite">
 
       <router-link to="/favorite">
-        <h5><font-awesome-icon icon="fa-solid fa-heart" /> My pick <font-awesome-icon icon="fa-solid fa-heart" /></h5>
+        <h5>
+          <font-awesome-icon icon="fa-solid fa-heart" /> My pick
+          <font-awesome-icon icon="fa-solid fa-heart" />
+        </h5>
       </router-link>
-      
+
     </div>
 
   </nav>
@@ -42,12 +45,15 @@ nav {
   display: flex;
   width: 150px;
 }
+
 .nav-center {
   justify-content: center;
 }
+
 .favorite {
   justify-content: end;
 }
+
 h3 {
   font-size: 24px;
 }
@@ -70,22 +76,33 @@ a {
     justify-content: center;
     align-content: center;
     padding: 20px 80px;
+    flex-direction: column;
+
+    & .nav-center,.favorite {
+      margin: 0;
+      width: 100%;
+      justify-content: center;
+    }
+    & .favorite {
+      margin-top: 10px;
+    }
+    & h3 {
+      font-size: 24px;
+      margin: 0;
+    }
+
+    & h5 {
+      font-size: 18px;
+      margin: 0;
+
+    }
   }
 
-  .nav-left,
-  .favorite {
+  .nav-left {
     display: none;
-    // align-items: center;
   }
 
-  h3 {
-    font-size: 24px;
-  }
 
-  h5 {
-    font-size: 18px;
-
-  }
 
   a {
     text-decoration: none;

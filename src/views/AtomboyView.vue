@@ -3,7 +3,11 @@
   <div class="container">
     <h1>ATOMBOYZ</h1>
     <div class="rwd-name">
-      <h3>{{ name }}</h3>
+      <div class="name">
+        <h3>{{ name }}</h3>
+        <font-awesome-icon :class="{ isPicked: this.pickedId.indexOf(id) === 1 }" @click="addFavorite(id)"
+          icon="fa-solid fa-heart" />
+      </div>
       <h5>{{ nickName }}</h5>
 
     </div>
@@ -26,9 +30,15 @@
 
       <div class="right-info">
         <div class="right-up">
-          <h3>{{ name }}</h3>
+
+          <div class="name">
+            <h3>{{ name }}</h3>
+            <font-awesome-icon :class="{ isPicked: this.pickedId.indexOf(id) === 1 }" @click="addFavorite(id)"
+          icon="fa-solid fa-heart" />
+          </div>
           <h5>{{ nickName }}</h5>
           <p>{{ introText }}</p>
+
           <table>
             <tbody>
               <tr>
@@ -48,7 +58,7 @@
           <a :href=instagram target="_blank">Instagram</a>
         </div>
         <div class="right-bottom" v-if="videoTitle">
-          <button><a :href="video">{{ videoTitle }}</a></button>
+          <button><a :href="video" target="_blank">{{ videoTitle }}</a></button>
         </div>
       </div>
       <div class="rwd-info">
@@ -80,6 +90,7 @@
 export default {
   data() {
     return {
+      id: '',
       name: '',
       nickName: '',
       pics: [],
@@ -90,7 +101,9 @@ export default {
       planet: '',
       group: '',
       videoTitle: '',
-      video: ''
+      video: '',
+      pickedId: JSON.parse(localStorage.getItem('pickedId')) || [],
+      pickedBoyz: []
     }
   },
   mounted() {
@@ -100,6 +113,7 @@ export default {
         // console.log(res.data)
         var allBoyz = res.data
         const atomboyInfo = allBoyz.find((e) => e.id === this.$route.params.atomId)
+        this.id = atomboyInfo.id
         this.name = atomboyInfo.name
         this.pics = atomboyInfo.pics
         this.mainPic = atomboyInfo.pics[0]
@@ -118,6 +132,21 @@ export default {
       console.log('changePic', i)
       console.log(this.pics)
       this.mainPic = this.pics[i]
+    },
+    addFavorite(id) {
+      console.log(id)
+      if (this.pickedId.indexOf(id) === -1) {
+        this.pickedId.push(id)
+        alert('成功加入你的pick')
+        localStorage.setItem('pickedId', JSON.stringify(this.pickedId))
+      } else {
+        var deleteArr = this.pickedId.filter((e) => {
+          return e !== id
+        })
+        this.pickedId = deleteArr
+        localStorage.setItem('pickedId', JSON.stringify(this.pickedId))
+        alert('他不是你的pickㄌ')
+      }
     }
   }
 }
@@ -184,6 +213,7 @@ td {
   display: none;
 }
 
+
 .container {
   padding: 40px;
 }
@@ -212,10 +242,12 @@ td {
     transform: scale(1.05);
   }
 }
+
 .small-pics {
   display: flex;
   overflow-x: scroll;
 }
+
 .img-s-matte {
   width: 100px;
   height: 100px;
@@ -241,6 +273,31 @@ td {
 .right-info {
   width: 50%;
   margin-left: 20px;
+
+}
+
+.name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  & svg {
+    width: 30px;
+    height: 30px;
+    color: white;
+    stroke: rgba(black, 0.7);
+    stroke-width: 10px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.isPicked {
+      color: #F06060;
+      stroke: none;
+
+    }
+  }
 }
 
 .right-up {
@@ -289,6 +346,14 @@ td {
       font-size: 20px;
       margin: 0;
     }
+
+    .name {
+      justify-content: center;
+
+      & h3 {
+        margin-right: 10px;
+      }
+    }
   }
 
   .rwd-info {
@@ -326,5 +391,6 @@ td {
   .right-info {
     display: none;
   }
+
 }
 </style>

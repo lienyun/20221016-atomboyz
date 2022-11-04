@@ -1,8 +1,12 @@
 <template>
   <div class="container">
     <div class="title">
-      <h3>大部分的原子少年</h3>
-      <p>並不是全體少年，依照個人喜好還有淘汰先後順序、網路聲浪等選出42位！</p>
+      <h3>原子少年</h3>
+      <p>
+        原子少年是台灣男團選秀節目，80名被徵選上的少年們會被分入八大行星中，演繹各式各樣風格的歌舞表演，陳嘉樺Ella、周湯豪、坤達、田一德負責主持，還有流星導師JPM王子、GEmma吳映潔等陪著少年們成長；最後會選出兩組五人音樂組合出道。（雖然後來好多團都出道，根本參加獎）
+        <hr>
+        以下並不是全體少年，依照個人喜好還有淘汰先後順序、網路聲浪等選出42位！
+      </p>
     </div>
     <PlanetNav @changePlanet="getPlanet" :currentPlanet="selectedPlanet"></PlanetNav>
 
@@ -15,7 +19,8 @@
         </router-link>
         <h3 class="rwd-name">{{ atomboy.name }}</h3>
 
-        <div class="pick" :class="{picked: this.pickedBoyz.indexOf(atomboy.id) !== -1}" @click="addFavorite(atomboy.id)">
+        <div class="pick" :class="{ picked: this.pickedBoyz.indexOf(atomboy.id) !== -1 }"
+          @click="addFavorite(atomboy.id)">
           <font-awesome-icon icon="fa-solid fa-heart" />
         </div>
       </div>
@@ -43,12 +48,12 @@ export default {
         this.selectedPlanetList = this.allBoyz
       })
 
-      if(localStorage.getItem('pickedId') === null){
-        this.pickedBoyz = []
-      }else{
-        this.pickedBoyz = [...JSON.parse(localStorage.getItem('pickedId'))]
-      }
-      console.log('mounted local',this.pickedBoyz)
+    if (localStorage.getItem('pickedId') === null) {
+      this.pickedBoyz = []
+    } else {
+      this.pickedBoyz = [...JSON.parse(localStorage.getItem('pickedId'))]
+    }
+    console.log('mounted local', this.pickedBoyz)
   },
   methods: {
     getPlanet(planet) {
@@ -63,22 +68,22 @@ export default {
         this.selectedPlanet = planet
       }
     },
-    addFavorite(pickedId){
+    addFavorite(pickedId) {
       console.log(pickedId)
-      
-      if(this.pickedBoyz.indexOf(pickedId) === -1){
+
+      if (this.pickedBoyz.indexOf(pickedId) === -1) {
         this.pickedBoyz.push(pickedId)
         alert('成功加入你的pick')
-        
-      }else{
-        var deleteArr = this.pickedBoyz.filter((e)=>{
+
+      } else {
+        var deleteArr = this.pickedBoyz.filter((e) => {
           return e !== pickedId
         })
         this.pickedBoyz = deleteArr
-        console.log('this.pickedBoyz',this.pickedBoyz)
+        console.log('this.pickedBoyz', this.pickedBoyz)
         alert('他不是你的pickㄌ')
       }
-      localStorage.setItem('pickedId',JSON.stringify(this.pickedBoyz))
+      localStorage.setItem('pickedId', JSON.stringify(this.pickedBoyz))
     },
   },
   components: {
@@ -195,21 +200,23 @@ p {
   display: none;
 }
 
-.pick{
+.pick {
   position: absolute;
   bottom: 20px;
   right: 20px;
   z-index: 999;
   color: white;
 
-  & svg{
+  & svg {
     width: 25px;
     height: 25px;
   }
-  &.picked{
+
+  &.picked {
     color: #F06060;
   }
-  &:hover{
+
+  &:hover {
     cursor: pointer;
   }
 }
