@@ -5,7 +5,7 @@
     <div class="rwd-name">
       <div class="name">
         <h3>{{ name }}</h3>
-        <font-awesome-icon :class="{ isPicked: this.pickedId.indexOf(id) === 1 }" @click="addFavorite(id)"
+        <font-awesome-icon :class="{ isPicked: this.pickedId.indexOf(id) !== -1 }" @click="addFavorite(id)"
           icon="fa-solid fa-heart" />
       </div>
       <h5>{{ nickName }}</h5>
@@ -33,7 +33,7 @@
 
           <div class="name">
             <h3>{{ name }}</h3>
-            <font-awesome-icon :class="{ isPicked: this.pickedId.indexOf(id) === 1 }" @click="addFavorite(id)"
+            <font-awesome-icon :class="{ isPicked: this.pickedId.indexOf(id) !== -1 }" @click="addFavorite(id)"
           icon="fa-solid fa-heart" />
           </div>
           <h5>{{ nickName }}</h5>
