@@ -108,7 +108,7 @@ export default {
   },
   mounted() {
     console.log(this.$route.params.atomId)
-    this.axios.get('../namelist.json')
+    this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
       .then((res) => {
         // console.log(res.data)
         var allBoyz = res.data

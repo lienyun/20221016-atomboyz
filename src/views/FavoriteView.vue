@@ -41,7 +41,7 @@ export default {
     }
   },
   async mounted() {
-    await this.axios.get('../namelist.json')
+    await this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
       .then((res) => {
         this.allBoyz = res.data
         console.log('this.allBoyz', this.allBoyz)

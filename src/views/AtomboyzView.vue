@@ -1,4 +1,5 @@
 <template>
+  <RWDPlanetNav @changePlanet="getPlanet" :currentPlanet="selectedPlanet" v-if="windowWidth<540"></RWDPlanetNav>
   <div class="container">
     <div class="title">
       <h3>原子少年</h3>
@@ -8,7 +9,7 @@
         以下並不是全體少年，依照個人喜好還有淘汰先後順序、網路聲浪等選出42位！
       </p>
     </div>
-    <PlanetNav @changePlanet="getPlanet" :currentPlanet="selectedPlanet"></PlanetNav>
+    <PlanetNav @changePlanet="getPlanet" :currentPlanet="selectedPlanet" v-if="windowWidth>540"></PlanetNav>
 
     <div class="cards-container">
       <div class="cards" v-for="atomboy in selectedPlanetList" :key="atomboy.id">
@@ -30,6 +31,7 @@
 </template>
 <script>
 import PlanetNav from '../components/PlanetNav.vue'
+import RWDPlanetNav from '../components/RwdPlanetNav.vue'
 
 export default {
   name: 'Artist',
@@ -38,11 +40,16 @@ export default {
       allBoyz: [],
       selectedPlanetList: [],
       selectedPlanet: '太陽系',
-      pickedBoyz: []
+      pickedBoyz: [],
+      windowWidth: 0
     }
   },
   mounted() {
-    this.axios.get('../namelist.json')
+    window.onresize = () => {
+      this.windowWidth = window.innerWidth
+    }
+
+    this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
       .then((res) => {
         this.allBoyz = res.data
         this.selectedPlanetList = this.allBoyz
@@ -87,7 +94,8 @@ export default {
     },
   },
   components: {
-    PlanetNav
+    PlanetNav,
+    RWDPlanetNav
   }
 }
 
@@ -226,6 +234,10 @@ p {
 
   .cards {
     padding: 20px 0;
+    & .pick {
+      bottom: 80px;
+      right: 30px;
+    }
   }
 
   .rwd-name {
