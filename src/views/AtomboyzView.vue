@@ -45,8 +45,11 @@ export default {
     }
   },
   mounted() {
+    this.windowWidth = window.innerWidth
+
     window.onresize = () => {
       this.windowWidth = window.innerWidth
+      
     }
 
     this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
@@ -60,7 +63,6 @@ export default {
     } else {
       this.pickedBoyz = [...JSON.parse(localStorage.getItem('pickedId'))]
     }
-    console.log('mounted local', this.pickedBoyz)
   },
   methods: {
     getPlanet(planet) {
@@ -76,7 +78,6 @@ export default {
       }
     },
     addFavorite(pickedId) {
-      console.log(pickedId)
 
       if (this.pickedBoyz.indexOf(pickedId) === -1) {
         this.pickedBoyz.push(pickedId)
