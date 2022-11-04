@@ -84,7 +84,7 @@ a {
       justify-content: center;
     }
     & .favorite {
-      margin-top: 10px;
+      display: none;
     }
     & h3 {
       font-size: 24px;

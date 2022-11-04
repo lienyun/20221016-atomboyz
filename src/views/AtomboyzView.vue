@@ -212,7 +212,7 @@ p {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  z-index: 999;
+  z-index: 2;
   color: white;
 
   & svg {
