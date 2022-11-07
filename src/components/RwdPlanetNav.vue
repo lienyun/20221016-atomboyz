@@ -44,7 +44,7 @@ $colorGreen: #8CBEB2;
     flex-shrink: 0;
     background-color: $colorOrange;
     border: 0px;
-    padding: 10px 20px;
+    padding: 25px 30px;
     color: white;
     font-weight: 600;
     font-size: 16px;

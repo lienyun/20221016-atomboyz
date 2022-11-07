@@ -69,6 +69,7 @@ export default {
 
       if (planet === '太陽系') {
         this.selectedPlanetList = this.allBoyz
+        this.selectedPlanet = '太陽系'
       } else {
         var selectedBoyz = this.allBoyz.filter((e) => {
           return e.planet === planet
