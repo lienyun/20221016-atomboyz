@@ -27,7 +27,8 @@ export default {
       console.log('loaded')
       this.isLoaded = true
     },3000)
-  }
+    this.$store.dispatch('getAllBoyz')
+  },
 }
 
 </script>

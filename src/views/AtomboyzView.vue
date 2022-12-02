@@ -3,7 +3,6 @@
   <div class="container">
     <div class="title">
       <h3>原子少年</h3>
-      <p>{{VuexAllBoyz}}</p>
       <p>
         原子少年是台灣男團選秀節目，80名被徵選上的少年們會被分入八大行星中，演繹各式各樣風格的歌舞表演，陳嘉樺Ella、周湯豪、坤達、田一德負責主持，還有流星導師JPM王子、GEmma吳映潔等陪著少年們成長；最後會選出兩組五人音樂組合出道。（雖然後來好多團都出道，根本參加獎）
         <hr>
@@ -38,27 +37,20 @@ export default {
   name: 'Artist',
   data() {
     return {
-      allBoyz: [],
+      // allBoyz: [],
       selectedPlanetList: [],
       selectedPlanet: '太陽系',
       pickedBoyz: [],
       windowWidth: 0
     }
   },
-  mounted() {
-    
+  mounted() {   
     this.windowWidth = window.innerWidth
-
+    this.selectedPlanetList = this.VuexAllBoyz
     window.onresize = () => {
       this.windowWidth = window.innerWidth
       
     }
-
-    this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
-      .then((res) => {
-        this.allBoyz = res.data
-        this.selectedPlanetList = this.allBoyz
-      })
 
     if (localStorage.getItem('pickedId') === null) {
       this.pickedBoyz = []
@@ -68,12 +60,11 @@ export default {
   },
   methods: {
     getPlanet(planet) {
-
       if (planet === '太陽系') {
-        this.selectedPlanetList = this.allBoyz
+        this.selectedPlanetList = this.VuexAllBoyz
         this.selectedPlanet = '太陽系'
       } else {
-        var selectedBoyz = this.allBoyz.filter((e) => {
+        var selectedBoyz = this.VuexAllBoyz.filter((e) => {
           return e.planet === planet
         })
         this.selectedPlanetList = selectedBoyz

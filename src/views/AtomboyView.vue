@@ -103,16 +103,10 @@ export default {
       videoTitle: '',
       video: '',
       pickedId: JSON.parse(localStorage.getItem('pickedId')) || [],
-      pickedBoyz: []
     }
   },
   mounted() {
-    console.log(this.$route.params.atomId)
-    this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
-      .then((res) => {
-        // console.log(res.data)
-        var allBoyz = res.data
-        const atomboyInfo = allBoyz.find((e) => e.id === this.$route.params.atomId)
+    const atomboyInfo = this.$store.state.allBoyz.find((e) => e.id === this.$route.params.atomId)
         this.id = atomboyInfo.id
         this.name = atomboyInfo.name
         this.pics = atomboyInfo.pics
@@ -125,7 +119,6 @@ export default {
         this.video = atomboyInfo.video
         this.videoTitle = atomboyInfo.videoTitle
         this.nickName = atomboyInfo.nickName
-      })
   },
   methods: {
     changePic(i) {

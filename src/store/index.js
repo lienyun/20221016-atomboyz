@@ -7,7 +7,6 @@ const store = createStore({
     },
     mutations: {
         mutationsGetAllBoyz(state,payload){
-            console.log('mutations run!')
             state.allBoyz = payload
         }
 
@@ -16,7 +15,6 @@ const store = createStore({
         getAllBoyz(context){
             axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
             .then((res) => {
-                console.log('actions',res.data)
                 context.commit('mutationsGetAllBoyz',res.data)
             })
             .catch((err)=>{
