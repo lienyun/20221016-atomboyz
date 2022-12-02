@@ -35,25 +35,17 @@ export default {
   name: 'Favorite',
   data() {
     return {
-      allBoyz: [],
       pickedId: JSON.parse(localStorage.getItem('pickedId')) || [],
       pickedBoyz: []
     }
   },
-  async mounted() {
-    await this.axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/gh-pages/namelist.json')
-      .then((res) => {
-        this.allBoyz = res.data
-        console.log('this.allBoyz', this.allBoyz)
-      })
-    console.log('this.pickedId', this.pickedId)
-    this.pickedBoyz = this.allBoyz.filter((el) => {
+  mounted() {
+    this.pickedBoyz = this.VuexAllBoyz.filter((el) => {
       return this.pickedId.includes(el.id)
     })
   },
   methods: {
     deleteFavorite(pickedId) {
-      // console.log(pickedId)
       var result = this.pickedBoyz.filter((e) => {
         return e.id !== pickedId
       })
@@ -65,6 +57,11 @@ export default {
       this.pickedId = idResult
       console.log('this.pickedId', this.pickedId)
       localStorage.setItem('pickedId', JSON.stringify(this.pickedId))
+    }
+  },
+  computed:{
+    VuexAllBoyz(){
+      return this.$store.state.allBoyz
     }
   }
 
