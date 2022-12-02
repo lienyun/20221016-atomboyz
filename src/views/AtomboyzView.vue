@@ -3,6 +3,7 @@
   <div class="container">
     <div class="title">
       <h3>原子少年</h3>
+      <p>{{VuexAllBoyz}}</p>
       <p>
         原子少年是台灣男團選秀節目，80名被徵選上的少年們會被分入八大行星中，演繹各式各樣風格的歌舞表演，陳嘉樺Ella、周湯豪、坤達、田一德負責主持，還有流星導師JPM王子、GEmma吳映潔等陪著少年們成長；最後會選出兩組五人音樂組合出道。（雖然後來好多團都出道，根本參加獎）
         <hr>
@@ -45,6 +46,7 @@ export default {
     }
   },
   mounted() {
+    
     this.windowWidth = window.innerWidth
 
     window.onresize = () => {
@@ -94,6 +96,11 @@ export default {
       }
       localStorage.setItem('pickedId', JSON.stringify(this.pickedBoyz))
     },
+  },
+  computed:{
+    VuexAllBoyz(){
+      return this.$store.state.allBoyz
+    }
   },
   components: {
     PlanetNav,
