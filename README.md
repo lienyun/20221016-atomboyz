@@ -9,6 +9,7 @@
 ## 使用技術
 1. CSS第一次用SCSS寫！之前都用SASS，但是常常看不清楚哪裡有縮排@@
 2. 框架是Vue3.x
+3. 支援RWD
 
 ## Project setup
 ```
