@@ -13,7 +13,7 @@ const store = createStore({
     },
     actions: {
         getAllBoyz(context){
-            axios.get('../namelist.json')
+            axios.get('https://raw.githubusercontent.com/lienyun/20221016-atomboyz/c5f674518de49fea6d53ab4087f85d7acfc75c05/public/namelist.json')
             .then((res) => {
                 context.commit('mutationsGetAllBoyz',res.data)
             })

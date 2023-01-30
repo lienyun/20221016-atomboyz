@@ -2,7 +2,7 @@
   <PageLoader v-if="!isLoaded"></PageLoader>
   
   <mainNav></mainNav>
-  <Carousel></Carousel>
+  <!-- <Carousel></Carousel> -->
   <router-view v-if="isLoaded"></router-view>
   <PickBtn></PickBtn>
 </template>
@@ -37,3 +37,13 @@ export default {
 }
 
 </script>
+
+<style lang="scss">
+$colorRed: #F06060;
+
+::selection {
+  background-color: $colorRed;
+  color: white;
+}
+
+</style>
