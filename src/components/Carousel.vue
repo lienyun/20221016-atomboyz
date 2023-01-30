@@ -34,7 +34,7 @@ export default {
     components: {
         Carousel,
         Slide,
-        Pagination,
+        // Pagination,
         Navigation,
     },
 }
@@ -56,5 +56,12 @@ export default {
         object-fit: contain;
     }
 
+}
+
+@media(max-width: 540px){
+    .carousel__item img {
+        width: 100vw;
+        height: 100vh;
+    }
 }
 </style>

@@ -23,7 +23,7 @@ export default {
       this.$emit('changePlanet', planet)
     },
     handleScroll() {
-      this.isSticky = window.scrollY > 104.66666412353516 ? true : false;
+      this.isSticky = window.scrollY > 744 ? true : false;
     }
   },
   props: ['currentPlanet']
